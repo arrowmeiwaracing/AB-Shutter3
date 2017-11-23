@@ -3,6 +3,8 @@ This is the Node-RED's node.
 AB Shutter3 is the camera shutter button of Bluetooth.  
 AB Shutter3 is sold at the Daiso as of November 2017.  
 
+https://www.youtube.com/watch?v=8WlTP4Ix2uA  
+![図１](./doc/z000.png)
 ![図１](./doc/z201.png)
 
 ## インストール
@@ -35,21 +37,34 @@ cat /proc/bus/input/devices
 ## Node-REDでの使い方
 
 ### bluetoothbuttonノードのinputピンに有効なデバイス名を入力すると動き始めます  
-![図１](./doc/z001.png)
+![図１](./doc/z001.png)  
+#### msg.payload.code, mode, btn で、押したボタンと状態を見れるようにしてあります
+
+![図２](./doc/z003.png)  
 injectノードからデバイス名(/dev/input/event2）を送っている例  
-![図２](./doc/z003.png)
+
 
 ### 大きいボタン（iOSと書いてある）を長押しした場合  
 
-![図４](./doc/z101.png)
+![図４](./doc/z101.png)  
+code: 115 で modeが　1(push)→2(hold)→0(relese)  
+（ボタン種別：btn=A　です）
 
 ### 小さいボタン（androidと書いてある）を長押しした場合  
 
-![図４](./doc/z102.png)
+![図４](./doc/z102.png)  
+code: 28が入った後（btn=Xにしてあります）、
+code: 115 で modeが　1(push)→2(hold)→0(relese)
+（ボタン種別：btn=B　です）
+code: 28が入って終わり（btn=Xにしてあります）、
 
 ### 大きいボタンを押しながら小さいボタンを長押しした場合  
 ![図４](./doc/z103_1.png)  
 ![図４](./doc/z103_2.png)  
+code: 28 で modeが　2(hold)
+（ボタン種別：btn=C　です）
+（不要なイベントにいてはボタン種別：btn=Xにしてあります）
+
 
 ## 最後に
 Node-RED core libraryを参考に作成しています。
