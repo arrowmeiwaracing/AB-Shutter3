@@ -7,6 +7,8 @@ https://www.youtube.com/watch?v=8WlTP4Ix2uA
 ![図１](./doc/z000.png)
 ![図１](./doc/z201.png)
 
+** When translating, please translate from [Japanese] into [your own language]. **  
+
 ## インストール
 注意！　当アプリはRaspberry Pi専用です。当アプリはNode-RED用の追加nodeです。
 
@@ -26,9 +28,9 @@ sudo chmod -R a+rwx keyaccess.py
 2. Raspbian GUI画面上部ツールバーのbluetoothアイコンを選び、  
 Add Device→ダイアログ→AB-Shutter3選択→何度かダイアログをOKします  
 ※一度ペアリングすると再起動しても設定は覚えていますが、AB-Shutter3をONするたびに接続許可のダイアログが出てきます
-3. AB-Shutter3のデバイス名の確認します  
-※Node-REDプログラミング時にデバイス名(/dev/input/event[X])を使用するため調べておきます  
 
+### AB-Shutter3のデバイス名を確認
+1. Node-REDプログラミング時にデバイス名(/dev/input/event[X])を使用するため調べておきます  
 cat /proc/bus/input/devices  
 
 ![図５](./doc/z005.png)
@@ -63,11 +65,11 @@ code: 28が入って終わり（btn=Xにしてあります）
 ![図４](./doc/z103_2.png)  
 code: 28 で modeが　2(hold)  
 （ボタン種別：btn=C　です）  
-（不要なイベントにいてはボタン種別：btn=Xにしてあります）  
+（不要なイベントについてはボタン種別：btn=Xにしてあります）  
 
 
 ## 最後に
 Node-RED core libraryのソースを元に作成しています。
 そのため、元のライセンスと同じ Apache License Version 2.0 にしました。  
-ご自由にお使いください。
+どうぞ、お楽しみください。
 
