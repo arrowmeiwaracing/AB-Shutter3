@@ -25,14 +25,14 @@ Add Device→ダイアログ→AB-Shutter3選択→何度かダイアログをOKする
 3. AB-Shutter3のデバイス名の確認  
 Node-REDプログラミング時にデバイス名(/dev/input/event[X])を使用するため、調べておきます  
 cat /proc/bus/input/devices  
-![図５](./doc/z05.png)
+![図５](./doc/z005.png)
 
 
 ## Node-REDでの使い方
 
 
 
-![図１](./doc/z01.png)
+![図１](./doc/z001.png)
 
 
 
