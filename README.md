@@ -10,9 +10,9 @@ https://www.youtube.com/watch?v=8WlTP4Ix2uA
 ## インストール
 注意！　当アプリはRaspberry Pi専用です。当アプリはNode-RED用の追加nodeです。
 
-※ホームフォルダが/home/piである前提で説明します。
+※ホームフォルダは /home/pi として説明します。
 
-1. .node-red 配下に nodes フォルダを作成します
+1. ホーム配下の.node-red フォルダに nodes フォルダを作成します
 2. GithubからZIPやcloneコマンドなどで取得したファイル全てをnodes配下に置きます  
 例）.node-red/nodes/AB-Shutter3
 3. 実行権が必要なファイルに実行権を付けます  
@@ -38,36 +38,36 @@ cat /proc/bus/input/devices
 
 ### bluetoothbuttonノードのinputピンに有効なデバイス名を入力すると動き始めます  
 ![図１](./doc/z001.png)  
-#### msg.payload.code, mode, btn で、押したボタンと状態を見れるようにしてあります
 
 ![図２](./doc/z003.png)  
 injectノードからデバイス名(/dev/input/event2）を送っている例  
 
+### msg.payload.code, mode, btn で、押したボタンと状態を見れるようにしてあります
 
-### 大きいボタン（iOSと書いてある）を長押しした場合  
+#### 大きいボタン（iOSと書いてある）を長押しした場合  
 
 ![図４](./doc/z101.png)  
 code: 115 で modeが　1(push)→2(hold)→0(relese)  
 （ボタン種別：btn=A　です）
 
-### 小さいボタン（androidと書いてある）を長押しした場合  
+#### 小さいボタン（androidと書いてある）を長押しした場合  
 
 ![図４](./doc/z102.png)  
-code: 28が入った後（btn=Xにしてあります）、
-code: 115 で modeが　1(push)→2(hold)→0(relese)
+code: 28が入った後（btn=Xにしてあります）、  
+code: 115 で modeが　1(push)→2(hold)→0(relese)  
 （ボタン種別：btn=B　です）
-code: 28が入って終わり（btn=Xにしてあります）、
+code: 28が入って終わり（btn=Xにしてあります）
 
-### 大きいボタンを押しながら小さいボタンを長押しした場合  
+#### 大きいボタンを押しながら小さいボタンを長押しした場合  
 ![図４](./doc/z103_1.png)  
 ![図４](./doc/z103_2.png)  
-code: 28 で modeが　2(hold)
-（ボタン種別：btn=C　です）
-（不要なイベントにいてはボタン種別：btn=Xにしてあります）
+code: 28 で modeが　2(hold)  
+（ボタン種別：btn=C　です）  
+（不要なイベントにいてはボタン種別：btn=Xにしてあります）  
 
 
 ## 最後に
-Node-RED core libraryを参考に作成しています。
-そのため、元のライセンスと同じ Apache License Version 2.0 です。
+Node-RED core libraryのソースを元に作成しています。
+そのため、元のライセンスと同じ Apache License Version 2.0 にしました。  
 ご自由にお使いください。
 
