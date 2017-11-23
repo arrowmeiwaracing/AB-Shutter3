@@ -15,10 +15,12 @@ module.exports = function(RED) {
         
         //var node.child = null;
         node.log("DEBUG: START");
+        
+        var sw = 0;
 
         node.on('input', function(msg) {
             //msg.node-input-name;
-             node.log(msg.payload);
+            node.log(msg.payload);
 
             node.child = spawn(pycmd + ".py", [msg.payload]);
             node.status({fill:"green",shape:"dot",text:"common.status.ok"});
@@ -26,9 +28,42 @@ module.exports = function(RED) {
 
             node.child.stdout.on('data', function (data) {
                 //node.log(data);
+                var stt;
                 var b = data.toString().trim().split(",");
-                var act = "up";
-                node.send({ topic:"pi/key", payload:{code: Number(b[0]), mode: Number(b[1]), tvsec: Number(b[2]), tvusec: Number(b[3])} });
+                if       (b[0]=="115" && b[1]=="1" && sw==0) {
+                  stt = "A";
+                } else if(b[0]=="115" && b[1]=="2" && sw==0) {
+                  stt = "A";
+                } else if(b[0]=="115" && b[1]=="0" && sw==0) {
+                  stt = "A";
+                } else if(b[0]=="115" && b[1]=="1" && sw==1) {
+                  stt = "B";
+                } else if(b[0]=="115" && b[1]=="2" && sw==1) {
+                  stt = "B";
+                } else if(b[0]=="115" && b[1]=="0" && sw==1) {
+                  stt = "B";
+                } else if(b[0]=="115" && b[1]=="0" && sw==2) {
+                  stt = "X";
+                } else if(b[0]=="28" && b[1]=="1") {
+                  stt = "X";
+                  sw = 1;
+                } else if(b[0]=="28" && b[1]=="2") {
+                  stt = "C";
+                  sw = 2;
+                } else if(b[0]=="28" && b[1]=="0") {
+                  stt = "X";
+                  sw = 0;
+                } else if(b[0]=="114" && b[1]=="1" && sw==0) { //volume down
+                  stt = "D";                                   //this event is nothing BUTTON
+                } else if(b[0]=="114" && b[1]=="2" && sw==0) { //but, on the circit
+                  stt = "D";                                   //
+                } else if(b[0]=="114" && b[1]=="0" && sw==0) { //
+                  stt = "D";                                   //
+                } else {
+                  stt = "X";
+
+                }
+                node.send({ topic:"pi/key", payload:{code: Number(b[0]), mode: Number(b[1]), tvsec: Number(b[2]), tvusec: Number(b[3]), btn: stt } });
             });
 
             node.child.stderr.on('data', function (data) {
@@ -51,6 +86,10 @@ module.exports = function(RED) {
                 else if (err.errno === "EACCES") { node.error(RED._("bluetoothbutton.errors.commandnotexecutable")); }
                 else { node.error(RED._("bluetoothbutton.errors.error")+': ' + err.errno); }
             });
+        });
+
+        node.on("open", function(done) {
+            node.status({fill:"grey",shape:"ring",text:"bluetoothbutton.status.closed"});
         });
 
         node.on("close", function(done) {
