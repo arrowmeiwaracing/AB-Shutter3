@@ -17,15 +17,18 @@ sudo chmod -R a+rwx keyaccess.py
 
 ## 設定
 
-### AB-Shutter3をペアリングします
-1. AB-Shutter3の電源をON
+### AB-Shutter3のペアリング
+1. AB-Shutter3の電源をONします
 2. Raspbian GUI画面上部ツールバーのbluetoothアイコンを選び、  
-Add Device→ダイアログ→AB-Shutter3選択→何度かダイアログをOKする  
+Add Device→ダイアログ→AB-Shutter3選択→何度かダイアログをOKします  
 ※一度ペアリングすると再起動しても設定は覚えていますが、AB-Shutter3をONするたびに接続許可のダイアログが出てきます
-3. AB-Shutter3のデバイス名の確認  
-Node-REDプログラミング時にデバイス名(/dev/input/event[X])を使用するため、調べておきます  
+3. AB-Shutter3のデバイス名の確認します  
+※Node-REDプログラミング時にデバイス名(/dev/input/event[X])を使用するため調べておきます  
+
 cat /proc/bus/input/devices  
+
 ![図５](./doc/z005.png)
+
 
 
 ## Node-REDでの使い方
@@ -33,6 +36,9 @@ cat /proc/bus/input/devices
 
 
 ![図１](./doc/z001.png)
+![図２](./doc/z002.png)
+![図３](./doc/z003.png)
+![図４](./doc/z004.png)
 
 
 
