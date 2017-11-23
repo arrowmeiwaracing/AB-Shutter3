@@ -3,6 +3,8 @@ This is the Node-RED's node.
 AB Shutter3 is the camera shutter button of Bluetooth.  
 AB Shutter3 is sold at the Daiso as of November 2017.  
 
+![図１](./doc/z201.png)
+
 ## インストール
 注意！　当アプリはRaspberry Pi専用です。当アプリはNode-RED用の追加nodeです。
 
@@ -30,16 +32,27 @@ cat /proc/bus/input/devices
 ![図５](./doc/z005.png)
 
 
-
 ## Node-REDでの使い方
 
-
-
+### bluetoothbuttonノードのinputピンに有効なデバイス名を入力すると動き始めます  
 ![図１](./doc/z001.png)
-![図２](./doc/z002.png)
-![図３](./doc/z003.png)
-![図４](./doc/z004.png)
+injectノードからデバイス名(/dev/input/event2）を送っている例  
+![図２](./doc/z003.png)
 
+### 大きいボタン（iOSと書いてある）を長押しした場合  
 
+![図４](./doc/z101.png)
 
+### 小さいボタン（androidと書いてある）を長押しした場合  
+
+![図４](./doc/z102.png)
+
+### 大きいボタンを押しながら小さいボタンを長押しした場合  
+![図４](./doc/z103_1.png)  
+![図４](./doc/z103_2.png)  
+
+## 最後に
+Node-RED core libraryを参考に作成しています。
+そのため、元のライセンスと同じ Apache License Version 2.0 です。
+ご自由にお使いください。
 

@@ -1,1 +1,0 @@
-sudo chmod -R a+rwx xxxx/keyaccess.py
