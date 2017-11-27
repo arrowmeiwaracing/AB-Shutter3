@@ -3,73 +3,73 @@ This is the Node-RED's node.
 AB Shutter3 is the camera shutter button of Bluetooth.  
 AB Shutter3 is sold at the Daiso as of November 2017.  
 
-https://www.youtube.com/watch?v=8WlTP4Ix2uA  
-![�}�P](./doc/z000.png)
-![�}�P](./doc/z201.png)
+https://www.youtube.com/watch?v=eBot2i8m92I
+![図１](./doc/z000.png)
+![図１](./doc/z201.png)
 
 ** When translating, please translate from [Japanese] into [your own language]. **  
 
-## �C���X�g�[��
-���ӁI�@���A�v����Raspberry Pi��p�ł��B���A�v����Node-RED�p�̒ǉ�node�ł��B
+## インストール
+注意！　当アプリはRaspberry Pi専用です。当アプリはNode-RED用の追加nodeです。
 
-���z�[���t�H���_�� /home/pi �Ƃ��Đ������܂��B
+※ホームフォルダは /home/pi として説明します。
 
-1. �z�[���z����.node-red �t�H���_�� nodes �t�H���_���쐬���܂�
-2. Github����ZIP��clone�R�}���h�ȂǂŎ擾�����t�@�C���S�Ă�nodes�z���ɒu���܂�  
-��j.node-red/nodes/AB-Shutter3
-3. ���s�����K�v�ȃt�@�C���Ɏ��s����t���܂�  
+1. ホーム配下の.node-red フォルダに nodes フォルダを作成します
+2. GithubからZIPやcloneコマンドなどで取得したファイル全てをnodes配下に置きます  
+例）.node-red/nodes/AB-Shutter3
+3. 実行権が必要なファイルに実行権を付けます  
 cd .node-red/nodes/AB-Shutter3  
 sudo chmod -R a+rwx keyaccess.py  
 
-## �ݒ�
+## 設定
 
-### AB-Shutter3�̃y�A�����O
-1. AB-Shutter3�̓d����ON���܂�
-2. Raspbian GUI��ʏ㕔�c�[���o�[��bluetooth�A�C�R����I�сA  
-Add Device���_�C�A���O��AB-Shutter3�I�������x���_�C�A���O��OK���܂�  
-����x�y�A�����O����ƍċN�����Ă��ݒ�͊o���Ă��܂����AAB-Shutter3��ON���邽�тɐڑ����̃_�C�A���O���o�Ă��܂�
+### AB-Shutter3のペアリング
+1. AB-Shutter3の電源をONします
+2. Raspbian GUI画面上部ツールバーのbluetoothアイコンを選び、  
+Add Device→ダイアログ→AB-Shutter3選択→何度かダイアログをOKします  
+※一度ペアリングすると再起動しても設定は覚えていますが、AB-Shutter3をONするたびに接続許可のダイアログが出てきます
 
-### AB-Shutter3�̃f�o�C�X�����m�F
-1. Node-RED�v���O���~���O���Ƀf�o�C�X��(/dev/input/event[X])���g�p���邽�ߒ��ׂĂ����܂�  
+### AB-Shutter3のデバイス名を確認
+1. Node-REDプログラミング時にデバイス名(/dev/input/event[X])を使用するため調べておきます  
 cat /proc/bus/input/devices  
 
-![�}�T](./doc/z005.png)
+![図５](./doc/z005.png)
 
 
-## Node-RED�ł̎g����
+## Node-REDでの使い方
 
-### bluetoothbutton�m�[�h��input�s���ɗL���ȃf�o�C�X������͂���Ɠ����n�߂܂�  
-![�}�P](./doc/z001.png)  
+### bluetoothbuttonノードのinputピンに有効なデバイス名を入力すると動き始めます  
+![図１](./doc/z001.png)  
 
-![�}�Q](./doc/z003.png)  
-inject�m�[�h����f�o�C�X��(/dev/input/event2�j�𑗂��Ă����  
+![図２](./doc/z003.png)  
+injectノードからデバイス名(/dev/input/event2）を送っている例  
 
-### msg.payload.code, mode, btn �ŁA�������{�^���Ə�Ԃ������悤�ɂ��Ă���܂�
+### msg.payload.code, mode, btn で、押したボタンと状態を見れるようにしてあります
 
-#### �傫���{�^���iiOS�Ə����Ă���j�𒷉��������ꍇ  
+#### 大きいボタン（iOSと書いてある）を長押しした場合  
 
-![�}�S](./doc/z101.png)  
-code: 115 �� mode���@1(push)��2(hold)��0(relese)  
-�i�{�^����ʁFbtn=A�@�ł��j
+![図４](./doc/z101.png)  
+code: 115 で modeが　1(push)→2(hold)→0(relese)  
+（ボタン種別：btn=A　です）
 
-#### �������{�^���iandroid�Ə����Ă���j�𒷉��������ꍇ  
+#### 小さいボタン（androidと書いてある）を長押しした場合  
 
-![�}�S](./doc/z102.png)  
-code: 28����������ibtn=X�ɂ��Ă���܂��j�A  
-code: 115 �� mode���@1(push)��2(hold)��0(relese)  
-�i�{�^����ʁFbtn=B�@�ł��j
-code: 28�������ďI���ibtn=X�ɂ��Ă���܂��j
+![図４](./doc/z102.png)  
+code: 28が入った後（btn=Xにしてあります）、  
+code: 115 で modeが　1(push)→2(hold)→0(relese)  
+（ボタン種別：btn=B　です）
+code: 28が入って終わり（btn=Xにしてあります）
 
-#### �傫���{�^���������Ȃ��珬�����{�^���𒷉��������ꍇ  
-![�}�S](./doc/z103_1.png)  
-![�}�S](./doc/z103_2.png)  
-code: 28 �� mode���@2(hold)  
-�i�{�^����ʁFbtn=C�@�ł��j  
-�i�s�v�ȃC�x���g�ɂ��Ă̓{�^����ʁFbtn=X�ɂ��Ă���܂��j  
+#### 大きいボタンを押しながら小さいボタンを長押しした場合  
+![図４](./doc/z103_1.png)  
+![図４](./doc/z103_2.png)  
+code: 28 で modeが　2(hold)  
+（ボタン種別：btn=C　です）  
+（不要なイベントについてはボタン種別：btn=Xにしてあります）  
 
 
-## �Ō��
-Node-RED core library�̃\�[�X�����ɍ쐬���Ă��܂��B
-���̂��߁A���̃��C�Z���X�Ɠ��� Apache License Version 2.0 �ɂ��܂����B  
-�ǂ����A���y���݂��������B
+## 最後に
+Node-RED core libraryのソースを元に作成しています。
+そのため、元のライセンスと同じ Apache License Version 2.0 にしました。  
+どうぞ、お楽しみください。
 
