@@ -3,7 +3,7 @@ This is the Node-RED's node.
 AB Shutter3 is the camera shutter button of Bluetooth.  
 AB Shutter3 is sold at the Daiso as of November 2017.  
 
-https://www.youtube.com/watch?v=eBot2i8m92I
+https://www.youtube.com/watch?v=eBot2i8m92I  
 ![図１](./doc/z000.png)
 ![図１](./doc/z201.png)
 
